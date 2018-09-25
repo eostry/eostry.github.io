@@ -140,7 +140,7 @@ function ask2()
 		var table = 'accounts';
 		var lower = 'EPRA';
 
-		g_eos.getTableRows(true, contract, scope, table, lower,0 ,-1, 1, function (error, data) {
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
 				$("#logid").html(JSON.stringify(data, null, 2));
 			} else {
