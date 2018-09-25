@@ -143,7 +143,7 @@ function ask2()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[1], null, 2));
+				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
 			} else {
 				$("#logid1").html(error);
 				console.log(error);
