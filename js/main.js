@@ -32,6 +32,9 @@ $(function () {
 })
 
 
+function WalletChange(obj) {
+	g_curwalletname = $(obj).val();
+}
 
 function HttpEndPointChange(obj) {
 	EosjsInit();
