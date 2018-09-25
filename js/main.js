@@ -161,9 +161,11 @@ function ask3()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#inp1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+				
+				document.getElementById("inp1").value=(data["rows"][0]["balance"]).split(" ")[0];
 			} else {
-				$("#inp1").html(error);
+
+				document.getElementById("inp1").value=error;
 				console.log(error);
 			}
 		})
