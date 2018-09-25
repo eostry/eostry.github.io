@@ -11,6 +11,7 @@ $(function () {
 
 	EosjsInit();
 	
+	
 
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
@@ -122,7 +123,7 @@ function ask1()
 		var table = 'accounts';
 		var lower = 'EPRA';
 
-		g_eos.getTableRows(true, contract, scope, table, "",0 ,-1, 1, function (error, data) {
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
 				$("#logid").html(JSON.stringify(data, null, 2));
 			} else {
@@ -138,13 +139,31 @@ function ask2()
 		var contract = 'okkkkkkkkkkk';
 		var scope = 'developstdio';
 		var table = 'accounts';
-		var lower = 'EPRA';
+		var lower = 'MOYU';
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify(data["rows"][0]["balance"].split(' ')[1], null, 2));
+				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
 			} else {
 				$("#logid1").html(error);
+				console.log(error);
+			}
+		})
+
+}
+
+function ask3()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'MOYU';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				$("#inp1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+			} else {
+				$("#inp1").html(error);
 				console.log(error);
 			}
 		})
