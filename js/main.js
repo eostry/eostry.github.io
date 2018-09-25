@@ -5,12 +5,12 @@ var g_eos = '';
 var g_abidata = '';
 
 $(function () {
-	
+	$("#tableid").hide();
+	$("#actionid").hide();
 	var $httpendpointid = $("#httpendpointid");
 	$httpendpointid.val("https://mainnet.eoscannon.io");
 
 	EosjsInit();
-	ask();
 
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
@@ -31,9 +31,44 @@ $(function () {
 
 })
 
-
 function WalletChange(obj) {
 	g_curwalletname = $(obj).val();
+}
+
+function TableChange(obj) {
+	g_curtable = $(obj).val();
+}
+
+function ActionChange(obj) {
+	var type = $(obj).val();
+	ActionParamParse(type);
+}
+
+function ActionParamParse(action) {
+	var action_type;
+	var actioncnt = g_abidata["abi"]["actions"].length;
+	for (var i = 0; i < actioncnt; i++) {
+		if (g_abidata["abi"]["actions"][i]["name"] == action) {
+			action_type = g_abidata["abi"]["actions"][i]["type"];
+			break;
+		}
+	}
+
+	var fields;
+	var structcnt = g_abidata["abi"]["structs"].length;
+	for (var i = 0; i < structcnt; i++) {
+		if (g_abidata["abi"]["structs"][i]["name"] == action_type) {
+			fields = g_abidata["abi"]["structs"][i]["fields"];
+			break;
+		}
+	}
+
+	$("#actionparamlistid").empty();
+	var fieldcnt = fields.length;
+	for (var i = 0; i < fieldcnt; i++) {
+		var paramdiv = "<div class='row justify-content-center' style='margin:20px auto;'><div class='col-3'><label class='text-right'>" + fields[i]["name"] + "</label></div><div class='col-8'><input placeholder='" + fields[i]["type"] + "'></input></div></div>";
+		$("#actionparamlistid").append(paramdiv);
+	}
 }
 
 function HttpEndPointChange(obj) {
@@ -97,23 +132,6 @@ function OperateSubmit() {
 	}
 }
 
-
-function ask()
-{
-		var contract = 'eosnamedapp1';
-		var scope = 'eosnamedapp1';
-		var table = 'accountstat';
-
-		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
-			if (error == null) {
-				$("#inp1").html(JSON.stringify(data, null, 2));
-			} else {
-				$("#inp1").html(error);
-				console.log(error);
-			}
-		})
-
-}
 function pusheosshishicaiaddlink() {
 	if (tp.isConnected() == true) {
 		try {
