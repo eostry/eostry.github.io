@@ -28,7 +28,7 @@ $(function () {
 	} else {
 		console.log("tp is not connected!");
 	}
-	ask();
+	
 })
 
 
@@ -144,7 +144,7 @@ function ask2()
 
 		}).then((data) =>  {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify(data[""], null, 2));
+				$("#logid1").html(JSON.stringify(data["rows"][0]["balance"], null, 2));
 			} else {
 				$("#logid1").html(error);
 				console.log(error);
