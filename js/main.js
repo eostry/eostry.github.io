@@ -117,9 +117,9 @@ function ask()
 
 function ask1()
 {
-		var contract = 'eosnamedapp1';
-		var scope = 'eosnamedapp1';
-		var table = 'accountstat';
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
 
 		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
 			if (error == null) {
