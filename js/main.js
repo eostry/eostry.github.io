@@ -120,8 +120,9 @@ function ask1()
 		var contract = 'okkkkkkkkkkk';
 		var scope = 'developstdio';
 		var table = 'accounts';
+		var lower = 'EPRA';
 
-		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
+		g_eos.getTableRows(true, contract, scope, table, lower ,-1, 1, function (error, data) {
 			if (error == null) {
 				$("#logid").html(JSON.stringify(data, null, 2));
 			} else {
