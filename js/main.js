@@ -122,7 +122,7 @@ function ask1()
 		var table = 'accounts';
 		var lower = 'EPRA';
 
-		g_eos.getTableRows(true, contract, scope, table, 0 ,-1, 1, function (error, data) {
+		g_eos.getTableRows(true, contract, scope, table, "",0 ,-1, 1, function (error, data) {
 			if (error == null) {
 				$("#logid").html(JSON.stringify(data, null, 2));
 			} else {
@@ -136,18 +136,15 @@ function ask1()
 function ask2()
 {
 		var contract = 'okkkkkkkkkkk';
-		var scope = 'eosvotetoken';
+		var scope = 'developstdio';
 		var table = 'accounts';
+		var lower = 'EPRA';
 
-		g_eos.getTableRows({
-
-		json: "true", code: "okkkkkkkkkkk", scope: "developstdio", table: "accounts"
-
-		}).then((data) =>  {
+		g_eos.getTableRows(true, contract, scope, table, lower,0 ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify(data, null, 2));
+				$("#logid").html(JSON.stringify(data, null, 2));
 			} else {
-				$("#logid1").html(error);
+				$("#logid").html(error);
 				console.log(error);
 			}
 		})
