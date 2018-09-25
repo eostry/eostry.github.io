@@ -132,6 +132,27 @@ function ask1()
 
 }
 
+function ask2()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'eosvotetoken';
+		var table = 'accounts';
+
+		g_eos.getTableRows({
+
+		json: "true", code: "okkkkkkkkkkk", scope: "developstdio", table: "accounts", limit: "1" , lower:"EPRA"
+
+		}).then((data) =>  {
+			if (error == null) {
+				$("#logid1").html(JSON.stringify(data[""], null, 2));
+			} else {
+				$("#logid1").html(error);
+				console.log(error);
+			}
+		})
+
+}
+
 function pusheosshishicaiaddlink() {
 	if (tp.isConnected() == true) {
 		try {
