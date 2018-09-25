@@ -1,0 +1,334 @@
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#343a40">
+
+
+
+
+    <!-- CSS Files -->
+
+    <link href="assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+
+
+
+    <!-- Fonts and Icons -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/alertify.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/ghostframe.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <script src="js/jquery.min.js"></script>
+	<link href="css/bootstrap4.min.css" rel="stylesheet">
+    <script src="js/jquery_2.1.0.min.js"></script>
+    <script src="js/include.js"></script>
+    <script src="js/bootstrap4.min.js"></script>
+	<script src="js/tp.js"></script>
+	<script src="js/eos.min.js"></script>
+	<script src="js/scatter.min.js"></script>
+	<script language=javascript>
+
+			setTimeout("ask4()",500);
+	</script>
+	<style type="text/css">  
+		label{
+		width:100%;
+		float:left;
+		line-height:30px;
+		}
+		select{
+		width:100%;
+		float:left; 
+		height:30px; 
+		line-height:30px;
+		}
+		input{
+		width:100%;
+		float:left; 
+		height:30px; 
+		line-height:30px;
+		}
+		
+    </style>
+    <title>Scatter test</title>
+</head>
+
+<body>
+	    <div class="container">   
+			<div class="row justify-content-center" style="margin:20px auto;">
+			<div class="col-3">
+			<label class="text-right">钱包</label>
+			</div>
+			<div class="col-8">
+			<select id="accountlistid" onchange="WalletChange(this)"></select>
+			</div>
+			</div>
+			
+				
+		</div>
+		
+	
+		<div class="row justify-content-center" style="margin:20px auto;">
+		<div class="col-12">
+		<textarea  id="logid" style="width:100%;height:200px"></textarea>
+		</div>
+		</div>
+	
+	<div class="row justify-content-center" style="margin:20px auto;">
+		<div class="col-12">
+		<textarea  id="logid1" style="width:100%;height:200px"></textarea>
+		</div>
+		</div>
+	
+    <div class="image-container set-full-height" style="background-image: url('assets/img/letter1.jpg')">
+        
+			
+
+			
+		<div class="row justify-content-center" style="margin:20px auto;display:none;">
+		<div class="col-3">
+		<label class="text-right">节点</label>
+		</div>
+		<div class="col-8">
+		<input id="httpendpointid" onchange="HttpEndPointChange(this)"></input>
+		</div>
+		</div>
+
+
+
+       
+        <center>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label>接收币账户名（12位EOS账户名）</label>
+                    <input type="text"  id="inp1" >
+                    
+                </div>
+            </div>
+
+            <div class="col-sm-5 col-sm-offset-1">
+                <div class="form-group">
+                    <label>发币数量（小数点后为精确度）</label>
+                    <input type="text" id="inp2" >
+                   
+                </div>
+            </div>
+			
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label color=#ffffff>代币符号（1-6位的大写字母）</label>
+                    <input type="text" class="form-control" id="inp3" seg="3" >
+                    
+                </div>
+            </div>
+			
+			 <div class="col-sm-5 col-sm-offset-1">
+                <div class="form-group">
+                    <label>发币数量（小数点后为精确度）</label>
+                    <input type="text" class="form-control" id="inp2" seg="2" >
+                    
+                </div>
+            </div>
+			
+			
+			
+ <div class="col-sm-5">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="ask1()">买入</button>
+                </div>
+            </div>
+			
+			 <div class="col-sm-5 col-sm-offset-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="ask3()">卖出</button>
+                </div>
+            </div>
+			
+        </center>
+
+        <module-template data-is="state-play">
+
+            <div style="clear: both;">
+            </div>
+            <div style="clear: both;"></div>
+
+            
+        </module-template>
+
+        <div class="mds-group">
+            <link href="https://static.medishares.net/css/market/qixi2018.css" rel="stylesheet">
+            <div class="my-protocol right-align">
+                <a href="javascript:;" id="all">查询发币状态</a>
+            </div>
+            <div class="qixi">
+                <ul class="qixi-about">
+                    <li>
+                        <h3>关于莫与一键发币</h3>
+                        <div>只需要 30秒 3EOS，你就能发行一款属于自己的EOS发币。</div>
+                    </li>
+                    <li>
+                        <h3>检测代币符号是否已经被注册流程</h3>
+                        <ul class="application">
+                            <li>1.关注“深入浅出EOS”公众号，后台回复您想发行的币的符号</li>
+                            （例：MOYU）
+                            <li>2.若无回复，则可以注册</li>
+                            <li>3.若回复“已被注册”，则不可再注册</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>对于发币数量精度说明</h3>
+                        <ul class="application">
+                            <li>发币数量的精度需要按需填写！</li>
+                            <li>例如：</li>
+                            若发10个MOYU，则MOYU币总量为10，最小分割为一个币，不存在0.1这样的分割。
+                            <li>再例如</li>
+                            发10.000个MOYU，则MOYU币总量为10，最小分割为0.001个MOYU。
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>注意事项</h3>
+                        <ul class="application">
+                            <li>1.莫与一键发币DApp发币只需3EOS，价格比自己发币便宜了13倍哦</li>
+                            <li>2.用户确认之前所填信息无误即可点击发币按钮进行发币！</li>
+                            <li>3.利用莫与一键发币所发币种名字唯一，不可重复</li>
+                            <li>4.转账成功后币即可到账，可通过eosflare.io进行查询</li>
+                            <li>5.关注“深入浅出EOS”公众号，后台回复“钱包显示”即可获取在钱包中显示代币的详细教程。</li>
+                            <li>6.由于用户填写错误造成的损失本DApp概不负责</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>关于作者</h3>
+                        <div>关于“莫与一键发币”。任何问题可以通过公众号“深入浅出EOS”联系原作者莫与。</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="js/alertify.js"></script>
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/fontawesome-all.min.js"></script>
+        <script src="js/eos.min.js"></script>
+        <script src="js/mDialogMin.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="https://cdn.bootcss.com/bignumber.js/7.2.1/bignumber.min.js"></script>
+
+        <script>
+            $(function() {
+                var scatter = null,
+                    seletedTeam = null,
+                    money = null,
+                    eosPrice = null,
+                    endTime = null,
+                    roundMask = null,
+                    roundRedMask = null,
+                    roundKey = null,
+                    isEnded = false,
+                    isStarted = false,
+                    isEnded = false,
+                    roundBlueMask = null,
+                    startTime = null,
+                    endTime = null,
+                    base = 1000000,
+                    protocol = 'https',
+                    host = 'api.tokenika.io',
+                    port = 443,
+                    chainId = "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906";
+                var network = {
+                    protocol: protocol,
+                    host: host,
+                    port: port,
+                    blockchain: 'eos',
+                    chainId: chainId
+                };
+                console.log(protocol + "://" + host + ":" + port)
+                document.addEventListener('scatterLoaded', function(scatterExtension) {
+                    $(".scatter").hide();
+                    scatter = window.scatter;
+                    eos = scatter.eos(network, Eos, {}, "https");
+                });
+                if (localStorage.getItem('account')) {
+                    $("#log-btn").html("Logout");
+                } else {
+                    $("#log-btn").html("Login With Scatter");
+                }
+                if (!scatter) $(".scatter").show()
+                function getUrlParam(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return unescape(r[2]);
+                    return null;
+                }
+                $("#tixBuy").click(function() {
+                    if (!localStorage.getItem('account') && !scatter) {
+                        Dialog.init("Please install Scatter!");
+                        return;
+                    }
+                    scatter.getIdentity({
+                        accounts: [network]
+                    }).then(function(identity) {
+                        var account = identity.accounts[0];
+                        var options = {
+                            authorization: account.name + '@' + account.authority,
+                            broadcast: true,
+                            sign: true
+                        };
+                        var memo = '1-' + $('#inp1').val() + '-' + $('#inp2').val() + '-' + $('#inp3').val();
+                        eos.transfer(account.name, 'emmmmmmmmmmm', '3.0000 EOS', memo, options).then(function(tx) {
+                            Dialog.init("Success!");
+                        }).catch(function(e) {
+                            e = JSON.parse(e);
+                            Dialog.init('Tx failed: ' + e.error.details[0].message);
+                        })
+                        doLoginSuccess(identity);
+                    })
+                });
+                $("#log-btn").click(function() {
+                    if (!localStorage.getItem('account') && !scatter) {
+                        Dialog.init("Please install Scatter!");
+                        return;
+                    }
+                    if ($(this).html() == "Logout") {
+                        scatter.forgetIdentity().then(function() {
+                            doLogoutSuccess();
+                        });
+                    } else {
+                        localStorage.removeItem('account');
+                        scatter.getIdentity({
+                            accounts: [network]
+                        }).then(function(identity) {
+                            doLoginSuccess(identity);
+                        }).catch(function(e) {
+                            console.log(e);
+                        });
+                    }
+                });
+                function doLoginSuccess(identity) {
+                    var account = identity.accounts[0];
+                    console.log(account)
+                    localStorage.setItem('account', JSON.stringify(account));
+                    $("#log-btn").html("Logout");
+                    //$("#refUrl").html("https://fomoeos.github.io?ref="+account.name);
+                    //$(".scatter").hide();
+                    return account;
+                }
+                function doLogoutSuccess() {
+                    localStorage.removeItem('account');
+                    $("#log-btn").html("Login With Scatter");
+                    //$(".scatter").show();
+                }
+                $('#all').on('click', function() {
+                    var account = $('#inp1').val();
+                    window.location.href = ('https://eosflare.io/account/' + account);
+                })
+            })
+        </script>
+</body>
+
+</html>
