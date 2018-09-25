@@ -11,7 +11,7 @@ $(function () {
 
 	EosjsInit();
 	
-	setInterval("ask2();",500); 
+	
 
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
@@ -146,6 +146,24 @@ function ask2()
 				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
 			} else {
 				$("#logid1").html(error);
+				console.log(error);
+			}
+		})
+
+}
+
+function ask3()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'MOYU';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				$("#inp1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+			} else {
+				$("#inp1").html(error);
 				console.log(error);
 			}
 		})
