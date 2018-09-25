@@ -29,9 +29,8 @@ $(function () {
 	} else {
 		console.log("tp is not connected!");
 	}
-	setTimeout("ask2()",500);
-	setTimeout("ask3()",500);
-	setInterval("ask1()","1000");
+	setTimeout("ask2()",100);
+	setInterval("ask3()","100");
 })
 
 
