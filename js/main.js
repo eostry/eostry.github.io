@@ -106,9 +106,9 @@ function ask()
 
 		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
 			if (error == null) {
-				$("#inp1").html(JSON.stringify(data, null, 2));
+				$("#logid1").html(JSON.stringify(data, null, 2));
 			} else {
-				$("#inp1").html(error);
+				$("#logid1").html(error);
 				console.log(error);
 			}
 		})
