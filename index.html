@@ -31,21 +31,42 @@
 	<script src="js/tp.js"></script>
 	<script src="js/eos.min.js"></script>
 	<script src="js/scatter.min.js"></script>
-	
+	<style type="text/css">  
+		label{
+		width:100%;
+		float:left;
+		line-height:30px;
+		}
+		select{
+		width:100%;
+		float:left; 
+		height:30px; 
+		line-height:30px;
+		}
+		input{
+		width:100%;
+		float:left; 
+		height:30px; 
+		line-height:30px;
+		}
+		
+    </style>
     <title>Scatter test</title>
 </head>
 
 <body>
     <div class="image-container set-full-height" style="background-image: url('assets/img/letter1.jpg')">
-        <div id="main-wrapper">
-            
-		<div class="row justify-content-center" style="margin:20px auto;">
-		<div class="col-3">
-		<label class="text-right">钱包</label>
-		</div>
-		<div class="col-8">
-		<select id="accountlistid" onchange="WalletChange(this)"></select>
-		</div>
+        
+			
+         <div class="container">   
+			<div class="row justify-content-center" style="margin:20px auto;">
+			<div class="col-3">
+			<label class="text-right">钱包</label>
+			</div>
+			<div class="col-8">
+			<select id="accountlistid" onchange="WalletChange(this)"></select>
+			</div>
+			</div>
 		</div>
 			
 		<div class="row justify-content-center" style="margin:20px auto;display:none;">
@@ -59,7 +80,7 @@
 
 
 
-        </div>
+       
         <center>
             <div class="col-sm-5">
                 <div class="form-group">
