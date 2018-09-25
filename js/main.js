@@ -143,7 +143,7 @@ function ask2()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+				$("#logid1").html(JSON.stringify((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower), null, 2));
 			} else {
 				$("#logid1").html(error);
 				console.log(error);
@@ -162,10 +162,30 @@ function ask3()
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
 				
-				document.getElementById("inp1").value=(data["rows"][0]["balance"]).split(" ")[0];
+				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
 
 				document.getElementById("inp1").value=error;
+				console.log(error);
+			}
+		})
+
+}
+
+function ask4()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'MOYU';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				
+				document.getElementById("inp2").value=((data["rows"][0]["balance"]).split(" ")[0]+' '+lower);
+			} else {
+
+				document.getElementById("inp2").value=error;
 				console.log(error);
 			}
 		})
