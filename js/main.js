@@ -25,10 +25,10 @@ $(function () {
 
 	EosjsInit();
 	//setInterval("ask3()","2000");
-	setInterval("ask4()","2000");
+	//setInterval("ask4()","2000");
 
 	setInterval(ask3, 1000);
-
+	setInterval(ask4, 1000);	
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
 		console.log("scatterLoaded enter");
 		scatter = window.scatter;
@@ -271,4 +271,73 @@ function scatterLogin() {
 	}).catch(function (e) {
 		console.log(e);
 	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function transfersell() {
+	try {
+		
+		var sellasset = $("#sellasset").val();
+		if (tp.isConnected() == true) {
+			tp.eosTokenTransfer({
+				from: $("#loginbtn").html(),
+				to: 'emmmmmmmmmmm',
+				amount: $("#sellasset").val(),
+				tokenName: "MOYU",
+				precision: 4,
+				contract: 'okkkkkkkkkkk',
+				memo: 'i love u',
+			}).then(function (data) {
+				//Dialog.init('Success!');
+				//sellcoinchange();
+			}).catch(function (err) {
+				Dialog.init(JSON.stringify(err));
+			});
+		} else {
+			scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+
+				eos.contract("okkkkkkkkkkk", options).then(contract => {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'i love u', options).then(function (tx) {
+						Dialog.init('Success!');
+						//sellcoinchange();
+						//getaccountinfo(account.name);
+					}).catch(function (e) {
+						console.log(e);
+						e = JSON.parse(e);
+						Dialog.init('Tx failed: ' + e.error.details[0].message);
+					});
+				});
+
+			})
+		}
+	} catch (e) {
+		Dialog.init(e);
+	}
+}
+
+function sell() {
+	if (loginflag == 0) {
+		Dialog.init("请先点击登录");
+	}
+	transfersell();
 }
