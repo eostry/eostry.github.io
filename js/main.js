@@ -55,7 +55,8 @@ function ask1()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				
+	
+				alert((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower)); 
 				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
 
@@ -142,7 +143,7 @@ function scatterLogin() {
 		//getaccountinfo(account.name);
 		$("#loginbtn").attr("disabled", true);
 		$("#loginbtn").html(account.name).css('color', '#1E90FF');
-		ask3();
+		//ask3();
 
 	}).catch(function (e) {
 		console.log(e);
