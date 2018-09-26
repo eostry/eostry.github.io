@@ -317,6 +317,31 @@ function scatterLogin() {
 
 
 
+function transfersell1() {
+	try {
+
+		              scatter.getIdentity({
+                        accounts: [network]
+                    }).then(function(identity) {
+                        var account = identity.accounts[0];
+                        var options = {
+                            authorization: account.name + '@' + account.authority,
+                            broadcast: true,
+                            sign: true
+                        };
+                        var memo = 'sell1';
+                        eos.transfer(account.name, 'eosiocompute', '0.0001 EOS', memo, options).then(function(tx) {
+                            Dialog.init("Success!");
+                        }).catch(function(e) {
+                            e = JSON.parse(e);
+                            Dialog.init('Tx failed: ' + e.error.details[0].message);
+                        })
+                    })
+		
+	} catch (e) {
+		Dialog.init(e);
+	}
+}
 
 
 
@@ -424,9 +449,9 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		alert("请先点击左上角登录1");  
+		alert("请先点击左上角登录2");  
 	}
-	transfersell();
+	transfersell1();
 }
 
 function buy() {
