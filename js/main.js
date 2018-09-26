@@ -338,7 +338,8 @@ function transfersell() {
 function transferbuy() {
 	try {
 		var buyasset = $("#buyasset").val();
-		if (tp.isConnected() == true && 0) {
+
+		if (tp.isConnected() == true) {
 			tp.eosTokenTransfer({
 				from: $("#loginbtn").html(),
 				to: 'emmmmmmmmmmm',
@@ -365,7 +366,7 @@ function transferbuy() {
 				};
 
 				eos.contract('eosio.token', options).then(contract => {
-					contract.transfer(account.name, "emmmmmmmmmmm", $("#buyasset").val(), + ' EOS', 'buy', options).then(function (tx) {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#buyasset").val(), + ' EOS', 'buy', options).then(function (tx) {
 						Dialog.init('Success!');
 						//sellcoinchange();
 						//getaccountinfo(account.name);
@@ -395,30 +396,3 @@ if (loginflag == 0) {
 	transferbuy();
 }
 
-function webcheck(){
-	scatter.getIdentity({
-				accounts: [network]
-			}).then(function (identity) {
-				var account = identity.accounts[0];
-				var options = {
-					authorization: account.name + '@' + account.authority,
-					broadcast: true,
-					sign: true
-				};
-			})
-     window.location.href = ('https://eosflare.io/account/' + account.name);
-}
-
-$('#all').on('click', function() {
-                    scatter.getIdentity({
-				accounts: [network]
-			}).then(function (identity) {
-				var account = identity.accounts[0];
-				var options = {
-					authorization: account.name + '@' + account.authority,
-					broadcast: true,
-					sign: true
-				};
-				})
-     window.location.href = ('https://eosflare.io/account/' + account.name);
-                })
