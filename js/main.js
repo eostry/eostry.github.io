@@ -162,7 +162,7 @@ function ask1()
 				};
 				var scope = account.name;
 
-				alert(scope);  
+				
 			g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 					if (error == null) {
 						//$("#inp3").html(JSON.stringify(data, null, 2));
@@ -194,7 +194,7 @@ function ask2()
 				};
 				var scope = account.name;
 
-				alert(scope);  
+				
 			g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 					if (error == null) {
 						//$("#inp3").html(JSON.stringify(data, null, 2));
