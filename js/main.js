@@ -28,8 +28,8 @@ $(function () {
 	//setInterval("ask4()","2000");
 	setInterval(ask1, 1000);
 	setInterval(ask2, 1000);
-	setInterval(ask3, 500);
-	setInterval(ask4, 1000);	
+	setInterval(ask3, 100);
+	//setInterval(ask4, 1000);	
 
 
 		
@@ -151,9 +151,9 @@ function ask()
 
 function ask1()
 {
-		var contract = 'eosio.token';
+		var contract = 'okkkkkkkkkkk';
 		var table = 'accounts';
-		var lower = 'EOS';
+		var lower = 'MOYU';
 		scatter.getIdentity({
 				accounts: [network]
 			}).then(function (identity) {
