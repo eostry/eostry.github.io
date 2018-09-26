@@ -24,11 +24,19 @@ $(function () {
 	$httpendpointid.val("https://mainnet.eoscannon.io");
 
 	EosjsInit();
+	//setInterval("ask3()","2000");
+	setInterval("ask4()","2000");
+
+	setInterval(ask3, 1000);
+
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
 		console.log("scatterLoaded enter");
 		scatter = window.scatter;
 		eos = scatter.eos(network, Eos, {}, "https");
 	});
+
+
+
 	scatterLogin();
 	/*
 	if (tp.isConnected() == true) {
@@ -49,8 +57,7 @@ $(function () {
 	}
 	*/
 	//setTimeout("ask2()",100);
-	setInterval("ask3()","2000");
-	setInterval("ask4()","2000");
+	
 })
 
 
@@ -198,7 +205,7 @@ function ask4()
 		var contract = 'okkkkkkkkkkk';
 		var scope = 'developstdio';
 		var table = 'accounts';
-		var lower = 'EPRA';
+		var lower = 'MOYU';
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
