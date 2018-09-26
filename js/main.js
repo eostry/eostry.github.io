@@ -26,11 +26,12 @@ $(function () {
 	EosjsInit();
 	//setInterval("ask3()","2000");
 	//setInterval("ask4()","2000");
-
-	setInterval(ask3, 1000);
-	setInterval(ask4, 1000);	
-	setInterval(ask2, 1000);
 	setInterval(ask1, 1000);
+	setInterval(ask2, 1000);
+	setInterval(ask3, 500);
+	setInterval(ask4, 1000);	
+
+
 		
 
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
