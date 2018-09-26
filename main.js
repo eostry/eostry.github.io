@@ -3,6 +3,20 @@ var g_curtable = '';
 var g_curaction = '';
 var g_eos = '';
 var g_abidata = '';
+var eosjs = '';
+var eos = null;
+var scatter = null;
+var loginflag = 0;
+var sellersel = '';
+var sellerprice = '';
+var curcointype = '';
+var network = {
+	blockchain: 'eos',
+	protocol: 'https',
+	host: 'mainnet.eoscannon.io',
+	port: 443,
+	chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
+};
 
 $(function () {
 	
@@ -10,9 +24,21 @@ $(function () {
 	$httpendpointid.val("https://mainnet.eoscannon.io");
 
 	EosjsInit();
-	
-	
+	//setInterval("ask3()","2000");
+	//setInterval("ask4()","2000");
 
+	setInterval(ask3, 1000);
+	setInterval(ask4, 1000);	
+	document.addEventListener('scatterLoaded', function (scatterExtension) {
+		console.log("scatterLoaded enter");
+		scatter = window.scatter;
+		eos = scatter.eos(network, Eos, {}, "https");
+	});
+
+
+
+	scatterLogin();
+	/*
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
 			var accountcnt = data["wallets"]["eos"].length;
@@ -29,6 +55,8 @@ $(function () {
 	} else {
 		console.log("tp is not connected!");
 	}
+	*/
+	//setTimeout("ask2()",100);
 	
 })
 
@@ -119,15 +147,26 @@ function ask()
 function ask1()
 {
 		var contract = 'okkkkkkkkkkk';
-		var scope = 'developstdio';
 		var table = 'accounts';
 		var lower = 'EPRA';
+		scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+				var scope = account.name;
+			})
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid").html(JSON.stringify(data, null, 2));
+				//$("#inp3").html(JSON.stringify(data, null, 2));
+				document.getElementById("inp3").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
-				$("#logid").html(error);
+				//$("#inp3").html(error);
 				console.log(error);
 			}
 		})
@@ -143,9 +182,10 @@ function ask2()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+				//$("#logid1").html(JSON.stringify((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower), null, 2));
+				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
-				$("#logid1").html(error);
+				//$("#logid1").html(error);
 				console.log(error);
 			}
 		})
@@ -161,9 +201,31 @@ function ask3()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#inp1").html(JSON.stringify((data["rows"][0]["balance"]).split(" ")[0], null, 2));
+				
+				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
-				$("#inp1").html(error);
+
+				//document.getElementById("inp1").value=error;
+				console.log(error);
+			}
+		})
+
+}
+
+function ask4()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'MOYU';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				
+				document.getElementById("inp2").value=((data["rows"][0]["balance"]).split(" ")[0]+' '+lower);
+			} else {
+
+				//document.getElementById("inp2").value=error;
 				console.log(error);
 			}
 		})
@@ -201,40 +263,154 @@ function EosjsInit() {
 	g_eos = Eos(eosConfig);
 }
 
-function GetAbi() {
-	var $contractid = $("#contractid");
-	var $tablelistid = $("#tablelistid");
-	var $actionlistid = $("#actionlistid");
-	$tablelistid.empty();
-	$actionlistid.empty();
-	$("#tableid").hide();
-	$("#actionid").hide();
-	g_eos.getAbi($contractid.val(), function (error, data) {
-		if (error == null) {
-			g_abidata = data;
-			console.log(JSON.stringify(data, null, 2));
-			var tablecnt = data["abi"]["tables"].length;
-			for (var i = 0; i < tablecnt; i++) {
-				var tablename = data["abi"]["tables"][i]["name"];
-				$tablelistid.append(new Option(tablename, tablename));
-			}
+function scatterLogin() {
+	if (!scatter) {
+		Dialog.init("Please install Scatter!");
+		return;
+	}
 
-			var actioncnt = data["abi"]["actions"].length;
-			for (var i = 0; i < actioncnt; i++) {
-				var actionname = data["abi"]["actions"][i]["name"];
-				$actionlistid.append(new Option(actionname, actionname));
-			}
+	scatter.getIdentity({
+		accounts: [network]
+	}).then(function (identity) {
+		var account = identity.accounts[0];
+		loginflag = 1;
+		console.log(account.name + " 已登录");
+		//Dialog.init(account.name + " 已登录");
+		//getaccountinfo(account.name);
+		$("#loginbtn").attr("disabled", true);
+		$("#loginbtn").html(account.name).css('color', '#1E90FF');
 
-			$("#operatetypeid").empty();
-			$("#operatetypeid").append(new Option("pushaction", 0));
-			$("#operatetypeid").append(new Option("gettable", 1));
-
-			OperateShow($("#operatetypeid").val());
-
-			ActionParamParse($actionlistid.val());
-		} else {
-			$("#logid").html(error);
-			console.log(error);
-		}
-	})
+	}).catch(function (e) {
+		console.log(e);
+	});
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function transfersell() {
+	try {
+		
+		var sellasset = $("#sellasset").val();
+		if (tp.isConnected() == true) {
+			tp.eosTokenTransfer({
+				from: $("#loginbtn").html(),
+				to: 'emmmmmmmmmmm',
+				amount: $("#sellasset").val(),
+				tokenName: "MOYU",
+				precision: 4,
+				contract: 'okkkkkkkkkkk',
+				memo: 'sell',
+			}).then(function (data) {
+				//Dialog.init('Success!');
+				//sellcoinchange();
+			}).catch(function (err) {
+				Dialog.init(JSON.stringify(err));
+			});
+		} else {
+			scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+
+				eos.contract("okkkkkkkkkkk", options).then(contract => {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'sell', options).then(function (tx) {
+						//Dialog.init('Success!');
+						alert("Success!"); 
+						//sellcoinchange();
+						//getaccountinfo(account.name);
+					}).catch(function (e) {
+						console.log(e);
+						e = JSON.parse(e);
+						//Dialog.init('Tx failed: ' + e.error.details[0].message);
+						alert('Tx failed: ' + e.error.details[0].message); 
+					});
+				});
+
+			})
+		}
+	} catch (e) {
+		Dialog.init(e);
+	}
+}
+
+function transferbuy() {
+	try {
+		var buyasset = $("#buyasset").val();
+
+		if (tp.isConnected() == true) {
+			tp.eosTokenTransfer({
+				from: $("#loginbtn").html(),
+				to: 'emmmmmmmmmmm',
+				amount: $("#buyasset").val(),
+				tokenName: 'EOS',
+				precision: 4,
+				contract: 'eosio.token',
+				memo: 'buy',
+			}).then(function (data) {
+				//Dialog.init('Success!');
+				//sellcoinchange();
+			}).catch(function (err) {
+				Dialog.init(JSON.stringify(err));
+			});
+		} else {
+			scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+
+				eos.contract("eosio.token", options).then(contract => {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#buyasset").val() + ' EOS', 'buy', options).then(function (tx) {
+						//Dialog.init('Success!');
+						alert("Success!"); 
+						//sellcoinchange();
+						//getaccountinfo(account.name);
+					}).catch(function (e) {
+						console.log(e);
+						e = JSON.parse(e);
+						//Dialog.init('Tx failed: ' + e.error.details[0].message);
+						alert('Tx failed: ' + e.error.details[0].message); 
+					});
+				});
+
+			})
+		}
+	} catch (e) {
+		Dialog.init(e);
+	}
+}
+
+function sell() {
+if (loginflag == 0) {
+		alert("请先点击左上角登录");  
+	}
+	transfersell();
+}
+
+function buy() {
+if (loginflag == 0) {
+		 alert("请先点击左上角登录");  
+	}
+	transferbuy();
+}
+
