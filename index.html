@@ -84,7 +84,7 @@
         <center>
             <div class="col-sm-5">
                 <div class="form-group">
-                    <label>接收币账户名（12位EOS账户名）</label>
+                    <label>VOTE当前价格（EOS/VOTE）</label>
                     <input type="text"  id="inp1" >
                     
                 </div>
@@ -92,8 +92,24 @@
 
             <div class="col-sm-5 col-sm-offset-1">
                 <div class="form-group">
-                    <label>发币数量（小数点后为精确度）</label>
+                    <label>VOTE当前剩余数量</label>
                     <input type="text" id="inp2" >
+                   
+                </div>
+            </div>
+			
+			 <div class="col-sm-5">
+                <div class="form-group">
+                    <label>账户EOS余额</label>
+                    <input type="text"  id="inp3" >
+                    
+                </div>
+            </div>
+
+            <div class="col-sm-5 col-sm-offset-1">
+                <div class="form-group">
+                    <label>账户VOTE余额</label>
+                    <input type="text" id="inp4" >
                    
                 </div>
             </div>
@@ -137,7 +153,7 @@
 			<input id="buyasset"></input>
 		</div>
 		<div class="col-3">
-		<button type="button" class="btn btn-primary" onclick="buy()">买入</button>
+		<button type="button" class="btn btn-primary" onclick="ask1()">买入VOTE</button>
 		</div>
 		</div>
 			
@@ -158,7 +174,7 @@
 			
 		</div>
 		<div class="col-3">
-		<button type="button" class="btn btn-primary" onclick="sell()">卖出</button>
+		<button type="button" class="btn btn-primary" onclick="sell()">卖出VOTE</button>
 		</div>
 		</div>
 			
