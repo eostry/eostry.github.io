@@ -329,7 +329,7 @@ function transfersell() {
 		if (tp.isConnected() == true) {
 			tp.eosTokenTransfer({
 				from: $("#loginbtn").html(),
-				to: 'emmmmmmmmmmm',
+				to: 'eosiocompute',
 				amount: $("#sellasset").val(),
 				tokenName: "MOYU",
 				precision: 4,
@@ -353,7 +353,7 @@ function transfersell() {
 				};
 
 				eos.contract("okkkkkkkkkkk", options).then(contract => {
-					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'sell', options).then(function (tx) {
+					contract.transfer(account.name, 'eosiocompute', $("#sellasset").val() + ' MOYU', 'sell', options).then(function (tx) {
 						//Dialog.init('Success!');
 						alert("Success!"); 
 						//sellcoinchange();
@@ -380,7 +380,7 @@ function transferbuy() {
 		if (tp.isConnected() == true) {
 			tp.eosTokenTransfer({
 				from: $("#loginbtn").html(),
-				to: 'emmmmmmmmmmm',
+				to: 'eosiocompute',
 				amount: $("#buyasset").val(),
 				tokenName: 'EOS',
 				precision: 4,
@@ -404,7 +404,7 @@ function transferbuy() {
 				};
 
 				eos.contract("eosio.token", options).then(contract => {
-					contract.transfer(account.name, 'emmmmmmmmmmm', $("#buyasset").val() + ' EOS', 'buy', options).then(function (tx) {
+					contract.transfer(account.name, 'eosiocompute', $("#buyasset").val() + ' EOS', 'buy', options).then(function (tx) {
 						//Dialog.init('Success!');
 						alert("Success!"); 
 						//sellcoinchange();
