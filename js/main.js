@@ -153,7 +153,7 @@ function ask1()
 {
 		var contract = 'okkkkkkkkkkk';
 		var table = 'accounts';
-		var lower = 'MOYU';
+		var lower = 'EPRA';
 		scatter.getIdentity({
 				accounts: [network]
 			}).then(function (identity) {
@@ -216,7 +216,7 @@ function ask3()
 		var contract = 'okkkkkkkkkkk';
 		var scope = 'developstdio';
 		var table = 'accounts';
-		var lower = 'MOYU';
+		var lower = 'OCT';
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
