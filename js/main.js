@@ -147,15 +147,26 @@ function ask()
 function ask1()
 {
 		var contract = 'okkkkkkkkkkk';
-		var scope = 'developstdio';
 		var table = 'accounts';
 		var lower = 'EPRA';
+		scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+				var scope = account.name;
+			})
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid").html(JSON.stringify(data, null, 2));
+				//$("#inp3").html(JSON.stringify(data, null, 2));
+				document.getElementById("inp3").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
-				$("#logid").html(error);
+				//$("#inp3").html(error);
 				console.log(error);
 			}
 		})
@@ -171,9 +182,10 @@ function ask2()
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
-				$("#logid1").html(JSON.stringify((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower), null, 2));
+				//$("#logid1").html(JSON.stringify((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower), null, 2));
+				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
-				$("#logid1").html(error);
+				//$("#logid1").html(error);
 				console.log(error);
 			}
 		})
@@ -193,7 +205,7 @@ function ask3()
 				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
 			} else {
 
-				document.getElementById("inp1").value=error;
+				//document.getElementById("inp1").value=error;
 				console.log(error);
 			}
 		})
@@ -213,7 +225,7 @@ function ask4()
 				document.getElementById("inp2").value=((data["rows"][0]["balance"]).split(" ")[0]+' '+lower);
 			} else {
 
-				document.getElementById("inp2").value=error;
+				//document.getElementById("inp2").value=error;
 				console.log(error);
 			}
 		})
