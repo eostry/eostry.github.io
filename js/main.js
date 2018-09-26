@@ -10,9 +10,7 @@ $(function () {
 	$httpendpointid.val("https://mainnet.eoscannon.io");
 
 	EosjsInit();
-	
-	
-
+	scatterLogin();
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
 			var accountcnt = data["wallets"]["eos"].length;
@@ -179,7 +177,7 @@ function ask4()
 		var contract = 'okkkkkkkkkkk';
 		var scope = 'developstdio';
 		var table = 'accounts';
-		var lower = 'MOYU';
+		var lower = 'EPRA';
 
 		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
 			if (error == null) {
@@ -225,40 +223,24 @@ function EosjsInit() {
 	g_eos = Eos(eosConfig);
 }
 
-function GetAbi() {
-	var $contractid = $("#contractid");
-	var $tablelistid = $("#tablelistid");
-	var $actionlistid = $("#actionlistid");
-	$tablelistid.empty();
-	$actionlistid.empty();
-	$("#tableid").hide();
-	$("#actionid").hide();
-	g_eos.getAbi($contractid.val(), function (error, data) {
-		if (error == null) {
-			g_abidata = data;
-			console.log(JSON.stringify(data, null, 2));
-			var tablecnt = data["abi"]["tables"].length;
-			for (var i = 0; i < tablecnt; i++) {
-				var tablename = data["abi"]["tables"][i]["name"];
-				$tablelistid.append(new Option(tablename, tablename));
-			}
+function scatterLogin() {
+	if (!scatter) {
+		Dialog.init("Please install Scatter!");
+		return;
+	}
 
-			var actioncnt = data["abi"]["actions"].length;
-			for (var i = 0; i < actioncnt; i++) {
-				var actionname = data["abi"]["actions"][i]["name"];
-				$actionlistid.append(new Option(actionname, actionname));
-			}
+	scatter.getIdentity({
+		accounts: [network]
+	}).then(function (identity) {
+		var account = identity.accounts[0];
+		loginflag = 1;
+		console.log(account.name + " 已登录");
+		//Dialog.init(account.name + " 已登录");
+		//getaccountinfo(account.name);
+		$("#loginbtn").attr("disabled", true);
+		$("#loginbtn").html(account.name).css('color', '#1E90FF');
 
-			$("#operatetypeid").empty();
-			$("#operatetypeid").append(new Option("pushaction", 0));
-			$("#operatetypeid").append(new Option("gettable", 1));
-
-			OperateShow($("#operatetypeid").val());
-
-			ActionParamParse($actionlistid.val());
-		} else {
-			$("#logid").html(error);
-			console.log(error);
-		}
-	})
+	}).catch(function (e) {
+		console.log(e);
+	});
 }
