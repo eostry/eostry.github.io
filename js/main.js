@@ -29,8 +29,10 @@ $(function () {
 
 	setInterval(ask3, 1000);
 	setInterval(ask4, 1000);	
+	setInterval(ask2, 1000);
 	setInterval(ask1, 1000);
-	setInterval(ask2, 1000);	
+		
+
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
 		console.log("scatterLoaded enter");
 		scatter = window.scatter;
@@ -283,6 +285,8 @@ function scatterLogin() {
 	if (!scatter) {
 		Dialog.init("Please install Scatter!");
 		return;
+
+
 	}
 
 	scatter.getIdentity({
@@ -299,6 +303,9 @@ function scatterLogin() {
 	}).catch(function (e) {
 		console.log(e);
 	});
+
+	ask1();
+	ask2();
 }
 
 
