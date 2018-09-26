@@ -39,7 +39,7 @@ $(function () {
 
 	setInterval(ask1, 1000);
 	setInterval(ask2, 1000);
-	setInterval(ask3, 1000);
+	//setInterval(ask3, 1000);
 
 	
 })
@@ -292,7 +292,7 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		alert("请先点击左上角登录2");  
+		alert("请先点击左上角登录3");  
 	}
 	transfersell1();
 }
