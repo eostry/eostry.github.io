@@ -159,17 +159,20 @@ function ask1()
 					sign: true
 				};
 				var scope = account.name;
+
+				alert(scope);  
+			g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+					if (error == null) {
+						//$("#inp3").html(JSON.stringify(data, null, 2));
+						document.getElementById("inp3").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
+					} else {
+						//$("#inp3").html(error);
+						console.log(error);
+					}
+				})
 			})
 
-		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
-			if (error == null) {
-				//$("#inp3").html(JSON.stringify(data, null, 2));
-				document.getElementById("inp3").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
-			} else {
-				//$("#inp3").html(error);
-				console.log(error);
-			}
-		})
+
 
 }
 
@@ -402,7 +405,7 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		alert("请先点击左上角登录");  
+		alert("请先点击左上角登录1");  
 	}
 	transfersell();
 }
