@@ -318,13 +318,15 @@ function transfersell() {
 
 				eos.contract("okkkkkkkkkkk", options).then(contract => {
 					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'sell', options).then(function (tx) {
-						Dialog.init('Success!');
+						//Dialog.init('Success!');
+						alert("Success!"); 
 						//sellcoinchange();
 						//getaccountinfo(account.name);
 					}).catch(function (e) {
 						console.log(e);
 						e = JSON.parse(e);
-						Dialog.init('Tx failed: ' + e.error.details[0].message);
+						//Dialog.init('Tx failed: ' + e.error.details[0].message);
+						alert('Tx failed: ' + e.error.details[0].message); 
 					});
 				});
 
@@ -384,7 +386,7 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		Dialog.init("请先点击登录");
+		alert("请先点击左上角登录");  
 	}
 	transfersell();
 }
