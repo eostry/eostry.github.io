@@ -3,6 +3,20 @@ var g_curtable = '';
 var g_curaction = '';
 var g_eos = '';
 var g_abidata = '';
+var eosjs = '';
+var eos = null;
+var scatter = null;
+var loginflag = 0;
+var sellersel = '';
+var sellerprice = '';
+var curcointype = '';
+var network = {
+	blockchain: 'eos',
+	protocol: 'https',
+	host: 'mainnet.eoscannon.io',
+	port: 443,
+	chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
+};
 
 $(function () {
 	
