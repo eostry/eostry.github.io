@@ -368,7 +368,7 @@ function transferbuy() {
 				};
 
 				eos.contract("eosio.token", options).then(contract => {
-					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' EOS', 'sell', options).then(function (tx) {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#buyasset").val() + ' EOS', 'buy', options).then(function (tx) {
 						//Dialog.init('Success!');
 						alert("Success!"); 
 						//sellcoinchange();
