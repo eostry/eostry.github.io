@@ -27,9 +27,9 @@ $(function () {
 	//setInterval("ask3()","2000");
 	//setInterval("ask4()","2000");
 	setInterval(ask1, 1000);
-	setInterval(ask2, 1000);
-	setInterval(ask3, 100);
-	//setInterval(ask4, 1000);	
+	//setInterval(ask2, 1000);
+	setInterval(ask3, 1000);
+	setInterval(ask4, 1000);	
 
 
 		
