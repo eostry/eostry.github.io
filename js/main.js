@@ -391,7 +391,7 @@ if (loginflag == 0) {
 
 function buy() {
 if (loginflag == 0) {
-		Dialog.init("请先点击登录");
+		 alert("请先点击左上角登录");  
 	}
 	transferbuy();
 }
