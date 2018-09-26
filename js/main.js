@@ -18,31 +18,31 @@ var network = {
 	chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
 };
 
+function EosjsInit() {
+	var eosConfig = {
+		chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+		httpEndpoint: 'https://mainnet.eoscannon.io',
+		verbose: true
+	}
+
+	eosjs = Eos(eosConfig);
+}
+
 $(function () {
 	
-	var $httpendpointid = $("#httpendpointid");
-	$httpendpointid.val("https://mainnet.eoscannon.io");
-
 	EosjsInit();
-	//setInterval("ask3()","2000");
-	//setInterval("ask4()","2000");
-	setInterval(ask1, 1000);
-	//setInterval(ask2, 1000);
-	setInterval(ask3, 1000);
-	setInterval(ask4, 1000);	
-
-
-		
-
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
 		console.log("scatterLoaded enter");
 		scatter = window.scatter;
 		eos = scatter.eos(network, Eos, {}, "https");
 	});
 
+	setInterval(ask1, 1000);
+	setInterval(ask3, 1000);
+	setInterval(ask4, 1000);	
 
 
-	scatterLogin();
+		
 	/*
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
@@ -151,6 +151,7 @@ function ask()
 
 function ask1()
 {
+	if (loginflag != 0) {
 		var contract = 'okkkkkkkkkkk';
 		var table = 'accounts';
 		var lower = 'EPRA';
@@ -176,7 +177,11 @@ function ask1()
 					}
 				})
 			})
-
+		}
+		else
+		{
+			document.getElementById("inp3").value=('请先点击左上角登录');
+		}
 
 
 }
@@ -251,36 +256,6 @@ function ask4()
 
 }
 
-function pusheosshishicaiaddlink() {
-	if (tp.isConnected() == true) {
-		try {
-			var curaccount = g_curwalletname;
-			var upplayer = $("#upplayer").val();
-			var actionstr = '{"actions":[{"account":"eosshishicai","name":"addlink","authorization":[{"actor":"' + curaccount + '","permission":"active"}],"data":{"player":"' + curaccount + '","upplayer": "' + upplayer + '"}}]}';
-			var params = JSON.parse(actionstr);
-			tp.pushEosAction(params).then(data => {
-				//var result = JSON.stringify(JSON.parse(JSON.stringify(data)), null, 2);
-				//$('.consoleLog').html(result);
-			});
-
-		} catch (e) {
-			//$('.consoleLog').html(e);
-		}
-	} else {
-		console.log("tp is not connected!");
-
-	}
-}
-
-function EosjsInit() {
-	var eosConfig = {
-		chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-		httpEndpoint: $("#httpendpointid").val(),
-		verbose: true
-	}
-
-	g_eos = Eos(eosConfig);
-}
 
 function scatterLogin() {
 	if (!scatter) {
