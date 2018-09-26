@@ -122,7 +122,7 @@
 			
 		<div class="row justify-content-center" style="margin:20px auto;">
 		<div class="col-5">
-			买入EOS数量
+			买入EOS数量,精确到小数点后四位！（例:1.0000）
 		</div>
 		<div class="col-3">
 		
@@ -137,13 +137,13 @@
 			<input id="buyasset"></input>
 		</div>
 		<div class="col-3">
-		<button type="button" class="btn btn-primary" onclick="ask3()">买入</button>
+		<button type="button" class="btn btn-primary" onclick="buy()">买入</button>
 		</div>
 		</div>
 			
 		<div class="row justify-content-center" style="margin:20px auto;">
 		<div class="col-5">
-			卖出VOTE数量
+			卖出VOTE数量,精确到小数点后四位！（例:1.0000）
 		</div>
 		<div class="col-3">
 		
@@ -168,6 +168,7 @@
             <link href="https://static.medishares.net/css/market/qixi2018.css" rel="stylesheet">
             <div class="my-protocol right-align">
                 <a href="javascript:;" id="all">查询发币状态</a>
+				<a href="javascript:;"  onclick="webcheck()">asd</a>
             </div>
             <div class="qixi">
                 <ul class="qixi-about">
@@ -223,116 +224,7 @@
         <script src="js/moment.min.js"></script>
         <script src="https://cdn.bootcss.com/bignumber.js/7.2.1/bignumber.min.js"></script>
 		
-        <script>
-            $(function() {
-                var scatter = null,
-                    seletedTeam = null,
-                    money = null,
-                    eosPrice = null,
-                    endTime = null,
-                    roundMask = null,
-                    roundRedMask = null,
-                    roundKey = null,
-                    isEnded = false,
-                    isStarted = false,
-                    isEnded = false,
-                    roundBlueMask = null,
-                    startTime = null,
-                    endTime = null,
-                    base = 1000000,
-                    protocol = 'https',
-                    host = 'api.tokenika.io',
-                    port = 443,
-                    chainId = "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906";
-                var network = {
-                    protocol: protocol,
-                    host: host,
-                    port: port,
-                    blockchain: 'eos',
-                    chainId: chainId
-                };
-                console.log(protocol + "://" + host + ":" + port)
-                document.addEventListener('scatterLoaded', function(scatterExtension) {
-                    $(".scatter").hide();
-                    scatter = window.scatter;
-                    eos = scatter.eos(network, Eos, {}, "https");
-                });
-                if (localStorage.getItem('account')) {
-                    $("#log-btn").html("Logout");
-                } else {
-                    $("#log-btn").html("Login With Scatter");
-                }
-                if (!scatter) $(".scatter").show()
-                function getUrlParam(name) {
-                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-                    var r = window.location.search.substr(1).match(reg);
-                    if (r != null) return unescape(r[2]);
-                    return null;
-                }
-                $("#tixBuy").click(function() {
-                    if (!localStorage.getItem('account') && !scatter) {
-                        Dialog.init("Please install Scatter!");
-                        return;
-                    }
-                    scatter.getIdentity({
-                        accounts: [network]
-                    }).then(function(identity) {
-                        var account = identity.accounts[0];
-                        var options = {
-                            authorization: account.name + '@' + account.authority,
-                            broadcast: true,
-                            sign: true
-                        };
-                        var memo = '1-' + $('#inp1').val() + '-' + $('#inp2').val() + '-' + $('#inp3').val();
-                        eos.transfer(account.name, 'emmmmmmmmmmm', '3.0000 EOS', memo, options).then(function(tx) {
-                            Dialog.init("Success!");
-                        }).catch(function(e) {
-                            e = JSON.parse(e);
-                            Dialog.init('Tx failed: ' + e.error.details[0].message);
-                        })
-                        doLoginSuccess(identity);
-                    })
-                });
-                $("#log-btn").click(function() {
-                    if (!localStorage.getItem('account') && !scatter) {
-                        Dialog.init("Please install Scatter!");
-                        return;
-                    }
-                    if ($(this).html() == "Logout") {
-                        scatter.forgetIdentity().then(function() {
-                            doLogoutSuccess();
-                        });
-                    } else {
-                        localStorage.removeItem('account');
-                        scatter.getIdentity({
-                            accounts: [network]
-                        }).then(function(identity) {
-                            doLoginSuccess(identity);
-                        }).catch(function(e) {
-                            console.log(e);
-                        });
-                    }
-                });
-                function doLoginSuccess(identity) {
-                    var account = identity.accounts[0];
-                    console.log(account)
-                    localStorage.setItem('account', JSON.stringify(account));
-                    $("#log-btn").html("Logout");
-                    //$("#refUrl").html("https://fomoeos.github.io?ref="+account.name);
-                    //$(".scatter").hide();
-                    return account;
-                }
-                function doLogoutSuccess() {
-                    localStorage.removeItem('account');
-                    $("#log-btn").html("Login With Scatter");
-                    //$(".scatter").show();
-                }
-                $('#all').on('click', function() {
-                    var account = $('#inp1').val();
-                    window.location.href = ('https://eosflare.io/account/' + account);
-                })
-            })
-        </script>
+       
 </body>
 
 </html>
