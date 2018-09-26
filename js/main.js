@@ -29,6 +29,8 @@ $(function () {
 
 	setInterval(ask3, 1000);
 	setInterval(ask4, 1000);	
+	setInterval(ask1, 1000);
+	setInterval(ask2, 1000);	
 	document.addEventListener('scatterLoaded', function (scatterExtension) {
 		console.log("scatterLoaded enter");
 		scatter = window.scatter;
@@ -146,9 +148,9 @@ function ask()
 
 function ask1()
 {
-		var contract = 'okkkkkkkkkkk';
+		var contract = 'eosio.token';
 		var table = 'accounts';
-		var lower = 'EPRA';
+		var lower = 'EOS';
 		scatter.getIdentity({
 				accounts: [network]
 			}).then(function (identity) {
@@ -179,19 +181,30 @@ function ask1()
 function ask2()
 {
 		var contract = 'okkkkkkkkkkk';
-		var scope = 'developstdio';
 		var table = 'accounts';
-		var lower = 'MOYU';
+		var lower = 'EPRA';
+		scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+				var scope = account.name;
 
-		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
-			if (error == null) {
-				//$("#logid1").html(JSON.stringify((((data["rows"][0]["balance"]).split(" ")[0])+' '+lower), null, 2));
-				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
-			} else {
-				//$("#logid1").html(error);
-				console.log(error);
-			}
-		})
+				alert(scope);  
+			g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+					if (error == null) {
+						//$("#inp3").html(JSON.stringify(data, null, 2));
+						document.getElementById("inp4").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
+					} else {
+						//$("#inp3").html(error);
+						console.log(error);
+					}
+				})
+			})
 
 }
 
@@ -405,7 +418,7 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		alert("请先点击左上角登录1");  
+		alert("请先点击左上角登录");  
 	}
 	transfersell();
 }
@@ -417,3 +430,23 @@ if (loginflag == 0) {
 	transferbuy();
 }
 
+
+ $('#all').on('click', function() {
+
+
+
+ 			scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+				window.location.href = ('https://eosflare.io/account/' + account.name);
+			})
+
+                    
+                })
+            
