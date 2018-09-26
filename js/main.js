@@ -305,8 +305,6 @@ function scatterLogin() {
 		console.log(e);
 	});
 
-	ask1();
-	ask2();
 }
 
 
@@ -426,7 +424,7 @@ function transferbuy() {
 
 function sell() {
 if (loginflag == 0) {
-		alert("请先点击左上角登录");  
+		alert("请先点击左上角登录1");  
 	}
 	transfersell();
 }
@@ -438,23 +436,3 @@ if (loginflag == 0) {
 	transferbuy();
 }
 
-
- $('#all').on('click', function() {
-
-
-
- 			scatter.getIdentity({
-				accounts: [network]
-			}).then(function (identity) {
-				var account = identity.accounts[0];
-				var options = {
-					authorization: account.name + '@' + account.authority,
-					broadcast: true,
-					sign: true
-				};
-				window.location.href = ('https://eosflare.io/account/' + account.name);
-			})
-
-                    
-                })
-            
