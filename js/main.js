@@ -409,4 +409,16 @@ function webcheck(){
      window.location.href = ('https://eosflare.io/account/' + account.name);
 }
 
-
+$('#all').on('click', function() {
+                    scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+				})
+     window.location.href = ('https://eosflare.io/account/' + account.name);
+                })
