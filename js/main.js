@@ -10,7 +10,13 @@ $(function () {
 	$httpendpointid.val("https://mainnet.eoscannon.io");
 
 	EosjsInit();
+	document.addEventListener('scatterLoaded', function (scatterExtension) {
+		console.log("scatterLoaded enter");
+		scatter = window.scatter;
+		eos = scatter.eos(network, Eos, {}, "https");
+	});
 	scatterLogin();
+	/*
 	if (tp.isConnected() == true) {
 		tp.getWalletList('eos').then(data => {
 			var accountcnt = data["wallets"]["eos"].length;
@@ -27,9 +33,10 @@ $(function () {
 	} else {
 		console.log("tp is not connected!");
 	}
+	*/
 	//setTimeout("ask2()",100);
-	setInterval("ask3()","500");
-	setInterval("ask4()","500");
+	setInterval("ask3()","2000");
+	setInterval("ask4()","2000");
 })
 
 
