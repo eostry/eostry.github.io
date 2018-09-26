@@ -298,7 +298,7 @@ function transfersell() {
 				tokenName: "MOYU",
 				precision: 4,
 				contract: 'okkkkkkkkkkk',
-				memo: 'i love u',
+				memo: 'sell',
 			}).then(function (data) {
 				//Dialog.init('Success!');
 				//sellcoinchange();
@@ -317,7 +317,7 @@ function transfersell() {
 				};
 
 				eos.contract("okkkkkkkkkkk", options).then(contract => {
-					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'i love u', options).then(function (tx) {
+					contract.transfer(account.name, 'emmmmmmmmmmm', $("#sellasset").val() + ' MOYU', 'sell', options).then(function (tx) {
 						Dialog.init('Success!');
 						//sellcoinchange();
 						//getaccountinfo(account.name);
@@ -335,9 +335,88 @@ function transfersell() {
 	}
 }
 
+function transferbuy() {
+	try {
+		var buyasset = $("#buyasset").val();
+		if (tp.isConnected() == true && 0) {
+			tp.eosTokenTransfer({
+				from: $("#loginbtn").html(),
+				to: 'emmmmmmmmmmm',
+				amount: $("#buyasset").val(),
+				tokenName: 'EOS',
+				precision: 4,
+				contract: 'eosio.token',
+				memo: 'buy',
+			}).then(function (data) {
+				//Dialog.init('Success!');
+				//sellcoinchange();
+			}).catch(function (err) {
+				Dialog.init(JSON.stringify(err));
+			});
+		} else {
+			scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+
+				eos.contract('eosio.token', options).then(contract => {
+					contract.transfer(account.name, "emmmmmmmmmmm", $("#buyasset").val(), + ' EOS', 'buy', options).then(function (tx) {
+						Dialog.init('Success!');
+						//sellcoinchange();
+						//getaccountinfo(account.name);
+					}).catch(function (e) {
+						e = JSON.parse(e);
+						Dialog.init('Tx failed: ' + e.error.details[0].message);
+					});
+				});
+			})
+		}
+	} catch (e) {
+		Dialog.init(e);
+	}
+}
+
 function sell() {
-	if (loginflag == 0) {
+if (loginflag == 0) {
 		Dialog.init("请先点击登录");
 	}
 	transfersell();
 }
+
+function buy() {
+if (loginflag == 0) {
+		Dialog.init("请先点击登录");
+	}
+	transferbuy();
+}
+
+function webcheck(){
+	scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+     window.location.href = ('https://eosflare.io/account/' + account.name);
+}
+
+$('#all').on('click', function() {
+                    scatter.getIdentity({
+				accounts: [network]
+			}).then(function (identity) {
+				var account = identity.accounts[0];
+				var options = {
+					authorization: account.name + '@' + account.authority,
+					broadcast: true,
+					sign: true
+				};
+     window.location.href = ('https://eosflare.io/account/' + account.name);
+                })
