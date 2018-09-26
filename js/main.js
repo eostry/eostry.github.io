@@ -405,15 +405,15 @@ function transferbuy() {
 
 				eos.contract("eosio.token", options).then(contract => {
 					contract.transfer(account.name, 'eosiocompute', $("#buyasset").val() + ' EOS', 'buy', options).then(function (tx) {
-						//Dialog.init('Success!');
-						alert("Success!"); 
+						Dialog.init('Success!');
+						//alert("Success!"); 
 						//sellcoinchange();
 						//getaccountinfo(account.name);
 					}).catch(function (e) {
 						console.log(e);
 						e = JSON.parse(e);
-						//Dialog.init('Tx failed: ' + e.error.details[0].message);
-						alert('Tx failed: ' + e.error.details[0].message); 
+						Dialog.init('Tx failed: ' + e.error.details[0].message);
+						//alert('Tx failed: ' + e.error.details[0].message); 
 					});
 				});
 
