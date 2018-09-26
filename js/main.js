@@ -418,5 +418,6 @@ $('#all').on('click', function() {
 					broadcast: true,
 					sign: true
 				};
+				})
      window.location.href = ('https://eosflare.io/account/' + account.name);
                 })
