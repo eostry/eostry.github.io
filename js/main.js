@@ -38,118 +38,56 @@ $(function () {
 	});
 
 	setInterval(ask1, 1000);
+	setInterval(ask2, 1000);
 	setInterval(ask3, 1000);
-	setInterval(ask4, 1000);	
 
-
-		
-	/*
-	if (tp.isConnected() == true) {
-		tp.getWalletList('eos').then(data => {
-			var accountcnt = data["wallets"]["eos"].length;
-			var $accountlistid = $("#accountlistid");
-			$accountlistid.empty();
-			for (var i = 0; i <= accountcnt; i++) {
-				var accountname = data["wallets"]["eos"][i]["name"];
-				$accountlistid.append(new Option(accountname, accountname));
-				if (i == 0) {
-					g_curwalletname = accountname;
-				}
-			}
-		})
-	} else {
-		console.log("tp is not connected!");
-	}
-	*/
-	//setTimeout("ask2()",100);
 	
 })
 
 
-function WalletChange(obj) {
-	g_curwalletname = $(obj).val();
-}
-
-function HttpEndPointChange(obj) {
-	EosjsInit();
-}
-
-function OperateShow(type) {
-	if (type == 0) {
-		$("#tableid").hide();
-		$("#actionid").show();
-	} else if (type == 1) {
-		$("#tableid").show();
-		$("#actionid").hide();
-	}
-}
-
-function OperateChange(obj) {
-	var type = $(obj).val();
-	OperateShow(type);
-}
-
-function OperateSubmit() {
-	var contract = $("#contractid").val();
-	var type = $("#operatetypeid").val();
-	if (type == 0) {
-		try {
-			var curaccount = g_curwalletname;
-			var action = $("#actionlistid").val();
-			var paramdata = '';
-			$("#actionparamlistid").find(".row").each(function () {
-				paramname = $(this).find("label").html();
-				paramval = $(this).find("input").val();
-				paramdata += '"' + paramname + '":"' + paramval + '",';
-			});
-			paramdata = paramdata.substring(0, paramdata.length - 1)
-
-			var actionstr = '{"actions":[{"account":"' + contract + '","name":"' + action + '","authorization":[{"actor":"' + curaccount + '","permission":"active"}],"data":{' + paramdata + '}}]}';
-			console.log("actionstr is " + actionstr);
-			var params = JSON.parse(actionstr);
-			tp.pushEosAction(params).then(data => {
-				var result = JSON.stringify(JSON.parse(JSON.stringify(data)), null, 2);
-				$('#logid').html(result);
-			}).catch(function (err) {
-				$("#logid").html(err);
-			});
-		} catch (e) {
-			$("#logid").html(e);
-			console.log(e);
-		}
-	} else if (type == 1) {
-		var scope = $("#scopeid").val();
-		var table = $("#tablelistid").val();
-		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
-			if (error == null) {
-				$("#logid").html(JSON.stringify(data, null, 2));
-			} else {
-				$("#logid").html(error);
-				console.log(error);
-			}
-		})
-	}
-}
-
-
-function ask()
-{
-		var contract = 'eosnamedapp1';
-		var scope = 'eosnamedapp1';
-		var table = 'accountstat';
-
-		g_eos.getTableRows(true, contract, scope, table, function (error, data) {
-			if (error == null) {
-				$("#logid1").html(JSON.stringify(data, null, 2));
-			} else {
-				$("#logid1").html(error);
-				console.log(error);
-			}
-		})
-
-}
 
 function ask1()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'OCT';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				
+				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
+			} else {
+
+				//document.getElementById("inp1").value=error;
+				console.log(error);
+			}
+		})
+
+}
+
+function ask2()
+{
+		var contract = 'okkkkkkkkkkk';
+		var scope = 'developstdio';
+		var table = 'accounts';
+		var lower = 'MOYU';
+
+		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
+			if (error == null) {
+				
+				document.getElementById("inp2").value=((data["rows"][0]["balance"]).split(" ")[0]+' '+lower);
+			} else {
+
+				//document.getElementById("inp2").value=error;
+				console.log(error);
+			}
+		})
+
+}
+
+
+function ask3()
 {
 	if (loginflag != 0) {
 		var contract = 'okkkkkkkkkkk';
@@ -186,77 +124,6 @@ function ask1()
 
 }
 
-function ask2()
-{
-		var contract = 'okkkkkkkkkkk';
-		var table = 'accounts';
-		var lower = 'EPRA';
-		scatter.getIdentity({
-				accounts: [network]
-			}).then(function (identity) {
-				var account = identity.accounts[0];
-				var options = {
-					authorization: account.name + '@' + account.authority,
-					broadcast: true,
-					sign: true
-				};
-				var scope = account.name;
-
-				
-			g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
-					if (error == null) {
-						//$("#inp3").html(JSON.stringify(data, null, 2));
-						document.getElementById("inp4").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
-					} else {
-						//$("#inp3").html(error);
-						console.log(error);
-					}
-				})
-			})
-
-}
-
-function ask3()
-{
-		var contract = 'okkkkkkkkkkk';
-		var scope = 'developstdio';
-		var table = 'accounts';
-		var lower = 'OCT';
-
-		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
-			if (error == null) {
-				
-				document.getElementById("inp1").value=(((data["rows"][0]["balance"]).split(" ")[0])+' '+lower);
-			} else {
-
-				//document.getElementById("inp1").value=error;
-				console.log(error);
-			}
-		})
-
-}
-
-function ask4()
-{
-		var contract = 'okkkkkkkkkkk';
-		var scope = 'developstdio';
-		var table = 'accounts';
-		var lower = 'MOYU';
-
-		g_eos.getTableRows(true, contract, scope, table, "",lower ,-1, 1, function (error, data) {
-			if (error == null) {
-				
-				document.getElementById("inp2").value=((data["rows"][0]["balance"]).split(" ")[0]+' '+lower);
-			} else {
-
-				//document.getElementById("inp2").value=error;
-				console.log(error);
-			}
-		})
-
-}
-
-
 function scatterLogin() {
 	if (!scatter) {
 		Dialog.init("Please install Scatter!");
@@ -275,6 +142,7 @@ function scatterLogin() {
 		//getaccountinfo(account.name);
 		$("#loginbtn").attr("disabled", true);
 		$("#loginbtn").html(account.name).css('color', '#1E90FF');
+		ask3();
 
 	}).catch(function (e) {
 		console.log(e);
